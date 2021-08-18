@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/explosion_anim_f0.png" type="Texture" id=1]
+[ext_resource path="res://Character/Enemies/Blood.gd" type="Script" id=2]
+
+[node name="Blood" type="CPUParticles2D"]
+amount = 10
+lifetime = 0.1
+explosiveness = 1.0
+texture = ExtResource( 1 )
+spread = 25.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 240.0
+initial_velocity_random = 1.0
+scale_amount = 0.25
+scale_amount_random = 0.5
+color = Color( 0.729412, 0.117647, 0.117647, 1 )
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.03
+one_shot = true
+autostart = true
+
+[node name="FadeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="FadeTimer" to="." method="_on_FadeTimer_timeout"]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Levels/Rooms/Room.tres" type="TileSet" id=1]
+[ext_resource path="res://Levels/Rooms/Room.gd" type="Script" id=2]
+[ext_resource path="res://Character/Enemies/EnemiesTracker.tscn" type="PackedScene" id=3]
+
+[node name="Room" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="TileMap2" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="Entrance" type="Node2D" parent="."]
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="EnemyPositions" type="Node2D" parent="."]
+
+[node name="Enemies" parent="." instance=ExtResource( 3 )]
+
+[node name="Spikes" type="Node2D" parent="."]
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 2147483648
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

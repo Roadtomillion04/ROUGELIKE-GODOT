@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Weapons/Projectiles/TemplateProjectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/Fire Bullet Pixel All.png" type="Texture" id=2]
+[ext_resource path="res://Weapons/Projectiles/CrowPoision.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 2 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hitbox/Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5, 4 )
+
+[node name="CrowPoision" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+velocity = 200.0
+
+[node name="Hitbox" parent="." index="0"]
+damage = 0
+knockback_force = 0
+can_do_crit = false
+
+[node name="Sprite" parent="Hitbox" index="0"]
+visible = true
+modulate = Color( 0.215686, 0.0941176, 0.564706, 1 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 448.92, 18.8544, 14.8091, 12.1036 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="1"]
+position = Vector2( 0, -1 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+anims/fade = SubResource( 3 )
+
+[node name="CollisionShape2D" parent="WallsDetector" index="0"]
+position = Vector2( 0, -1 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

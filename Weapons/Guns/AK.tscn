@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Weapons/Guns/TemplateGuns.tscn" type="PackedScene" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/PixelWeapons2.png" type="Texture" id=2]
+[ext_resource path="res://Weapons/Projectiles/Bullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/muzzle_flashs/m_1.png" type="Texture" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+[sub_resource type="Animation" id=2]
+resource_name = "muzzle_flash"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MuzzleFlash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.05, 0.05 ), Vector2( 0.03, 0.07 ), Vector2( 0.05, 0.05 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../MuzzleFlash:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 16, -1 ), Vector2( 14, -1 ), Vector2( 16, -1 ) ]
+}
+
+[node name="AK" instance=ExtResource( 1 )]
+position = Vector2( 3, 0 )
+PROJECTILE = ExtResource( 3 )
+fire_rate = 0.2
+
+[node name="Sprite" parent="Node2D" index="0"]
+modulate = Color( 0, 0.870588, 1, 1 )
+scale = Vector2( 0.8, 1 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 2.06166, 3.47596, 28.7639, 6.26541 )
+
+[node name="CollisionShape2D" parent="Node2D/Sprite/HitBox" index="0"]
+visible = false
+shape = SubResource( 1 )
+disabled = true
+
+[node name="AnimationPlayer" parent="Node2D" index="1"]
+anims/muzzle_flash = SubResource( 2 )
+
+[node name="MuzzleFlash" parent="." index="2"]
+visible = false
+position = Vector2( 16, -1 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 4 )

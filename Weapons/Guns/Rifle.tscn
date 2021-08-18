@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Weapons/Guns/TemplateGuns.tscn" type="PackedScene" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/PixelWeapons2.png" type="Texture" id=2]
+[ext_resource path="res://Weapons/Guns/Rifle.gd" type="Script" id=3]
+[ext_resource path="res://Weapons/Projectiles/Rocket.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+[node name="Rifle" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+PROJECTILE = ExtResource( 4 )
+fire_rate = 0.6
+
+[node name="Sprite" parent="Node2D" index="0"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 2.35586, 13.4532, 23.3713, 9.2013 )
+
+[node name="HitBox" parent="Node2D/Sprite" index="0"]
+script = null
+
+[node name="CollisionShape2D" parent="Node2D/Sprite/HitBox" index="0"]
+visible = false
+shape = SubResource( 1 )
+disabled = true
+
+[node name="FireDelayTimer" parent="." index="1"]
+one_shot = true

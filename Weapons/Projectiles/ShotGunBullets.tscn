@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Weapons/Projectiles/TemplateProjectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/Fire Bullet Pixel All.png" type="Texture" id=2]
+[ext_resource path="res://Weapons/Projectiles/ShotGunBullets.gd" type="Script" id=3]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/hit_effect_anim_spritesheet.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 3 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 6, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 4 )
+region = Rect2( 6, 0, 6, 8 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 12, 0, 6, 8 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 18, 0, 6, 8 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "Hit_effect",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 11, 3 )
+
+[node name="ShotGunBullets" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+velocity = 300.0
+life_time = 0.3
+
+[node name="Hitbox" parent="." index="0"]
+knockback_force = 100
+
+[node name="Sprite" parent="Hitbox" index="0"]
+visible = true
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 205.586, 75.3092, 38.4196, 23.0518 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="1"]
+position = Vector2( 4, 1 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" parent="." index="1"]
+visible = false
+frames = SubResource( 6 )
+animation = "Hit_effect"
+
+[node name="CollisionShape2D" parent="WallsDetector" index="0"]
+visible = false
+position = Vector2( -1, 1 )
+shape = SubResource( 7 )
+[connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]

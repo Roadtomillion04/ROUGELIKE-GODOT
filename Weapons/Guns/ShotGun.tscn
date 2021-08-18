@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/PixelWeapons2.png" type="Texture" id=1]
+[ext_resource path="res://Weapons/Projectiles/ShotGunBullets.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Weapons/Guns/TemplateGuns.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapons/Guns/ShotGun.gd" type="Script" id=4]
+
+[node name="ShotGun" instance=ExtResource( 3 )]
+script = ExtResource( 4 )
+PROJECTILE = ExtResource( 2 )
+fire_rate = 1.0
+
+[node name="Sprite" parent="Node2D" index="0"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48.4769, 1.02548, 29.3335, 8.82854 )

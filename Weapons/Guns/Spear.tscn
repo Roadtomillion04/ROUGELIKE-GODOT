@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Weapons/Guns/TemplateGuns.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/Projectiles/Spear.tscn" type="PackedScene" id=2]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/sprite.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "SpearAnimation"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="Spear" instance=ExtResource( 1 )]
+PROJECTILE = ExtResource( 2 )
+fire_rate = 0.5
+
+[node name="Node2D" parent="." index="0"]
+rotation = 0.785398
+
+[node name="Sprite" parent="Node2D" index="0"]
+rotation = 1.5708
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 143.31, 50.2766, 18.8862, 12.4409 )
+
+[node name="AnimationPlayer" parent="Node2D" index="1"]
+anims/SpearAnimation = SubResource( 1 )

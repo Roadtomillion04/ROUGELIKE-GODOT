@@ -1,0 +1,170 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Weapons/Swords/TemplateSwords.tscn" type="PackedScene" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/Gear.png" type="Texture" id=2]
+[ext_resource path="res://Weapons/Swords/Hammer.gd" type="Script" id=3]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/enemy_afterdead_explosion_anim_spritesheet.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "HammerAnimation"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -90.0, 45.0, -90.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 0 ), Vector2( 3, 0 ), Vector2( 3, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 45.0, 90.0, 45.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../SlashSprite:hframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../SlashSprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.4, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 3, 3 ), Vector2( 4, 4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../SlashSprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.4, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../SlashSprite:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("../SlashSprite:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../SlashSprite/HitBox/CollisionShape2D:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.4, 0.55 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AnimationPlayer:playback_speed")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.65, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 2.0, 1.0, 0.5, 0.5 ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 7.5
+
+[node name="Hammer" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Node2D" parent="." index="0"]
+rotation = -1.5708
+
+[node name="Sprite" parent="Node2D" index="0"]
+position = Vector2( 3, 0 )
+rotation = 0.785398
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 159.571, -0.692396, 15.6686, 17.3857 )
+
+[node name="CollisionShape2D" parent="Node2D/Sprite/HitBox" index="0"]
+position = Vector2( 6.36396, -4.94975 )
+rotation = -0.785398
+
+[node name="AnimationPlayer" parent="Node2D" index="1"]
+anims/HammerAnimation = SubResource( 1 )
+
+[node name="SlashSprite" parent="." index="1"]
+visible = true
+position = Vector2( 0, 0 )
+scale = Vector2( 1.74796, 1.74796 )
+texture = ExtResource( 4 )
+hframes = 4
+frame = 1
+
+[node name="HitBox" parent="SlashSprite" index="0"]
+damage = 2
+knockback_force = 200
+
+[node name="CollisionShape2D" parent="SlashSprite/HitBox" index="0"]
+position = Vector2( -0.333333, 0 )
+shape = SubResource( 2 )
+disabled = false

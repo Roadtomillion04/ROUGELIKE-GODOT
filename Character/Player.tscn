@@ -1,0 +1,282 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://Character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f0.png" type="Texture" id=2]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f1.png" type="Texture" id=3]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f1.png" type="Texture" id=4]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f2.png" type="Texture" id=5]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f0.png" type="Texture" id=6]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f5.png" type="Texture" id=7]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f3.png" type="Texture" id=8]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f4.png" type="Texture" id=9]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f4.png" type="Texture" id=10]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f2.png" type="Texture" id=11]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f5.png" type="Texture" id=12]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f3.png" type="Texture" id=13]
+[ext_resource path="res://Character/Player.gd" type="Script" id=14]
+[ext_resource path="res://Character/FiniteStateMachine.gd" type="Script" id=15]
+[ext_resource path="res://Weapons/Guns/AK.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Weapons/Swords/Sword.tscn" type="PackedScene" id=17]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/hit_effect_anim_f0.png" type="Texture" id=18]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/props_itens/torch_anim_f4.png" type="Texture" id=19]
+[ext_resource path="res://UI/Shader.tres" type="Material" id=20]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/enemy_afterdead_explosion_anim_f3.png" type="Texture" id=21]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/enemy_afterdead_explosion_anim_f2.png" type="Texture" id=22]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/enemy_afterdead_explosion_anim_f0.png" type="Texture" id=23]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/enemy_afterdead_explosion_anim_f1.png" type="Texture" id=24]
+[ext_resource path="res://Character/WeaponManager.gd" type="Script" id=26]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "Dead",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 3.82033
+
+[sub_resource type="Animation" id=3]
+resource_name = "dash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 90.0, 180.0, 270.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "idle", "Dead" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:material:shader_param/flash_modifier")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 5 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "run" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.0814815, 0.192593, 0.318519, 0.437037, 0.488889, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.317927, 0.0956266, 0.0956266, 1, 0.751465, 0.226027, 0.226027, 1, 0.648661, 0.207452, 0.205455, 1, 0.847894, 0.67804, 0.677432, 1, 0.935059, 0.883923, 0.883923, 1, 0.0941176, 0.105882, 0.0941176, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 5.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 50.0
+angle_random = 1.0
+scale = 1.5
+scale_random = 1.0
+color_ramp = SubResource( 9 )
+
+[node name="Player" groups=[
+"Player",
+] instance=ExtResource( 1 )]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 14 )
+
+[node name="FiniteStateMachine" parent="." index="0"]
+script = ExtResource( 15 )
+
+[node name="AnimatedSprite" parent="." index="1"]
+material = ExtResource( 20 )
+frames = SubResource( 1 )
+animation = "idle"
+frame = 4
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2( 0.396851, 0.877155 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+anims/dash = SubResource( 3 )
+anims/dead = SubResource( 4 )
+anims/hurt = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/run = SubResource( 7 )
+
+[node name="HealthTimer" parent="." index="4"]
+wait_time = 10.0
+
+[node name="Particles2D" type="Particles2D" parent="." index="5"]
+position = Vector2( 0, 5 )
+amount = 5
+explosiveness = 1.0
+process_material = SubResource( 10 )
+texture = ExtResource( 18 )
+
+[node name="WeaponManager" type="Node2D" parent="." index="6" groups=[
+"WeaponManager",
+]]
+script = ExtResource( 26 )
+
+[node name="Sword" parent="WeaponManager" index="0" instance=ExtResource( 17 )]
+visible = false
+
+[node name="AK" parent="WeaponManager" index="1" instance=ExtResource( 16 )]
+
+[node name="Light2D" type="Light2D" parent="." index="7"]
+enabled = false
+texture = ExtResource( 19 )

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Character/Character.gd" type="Script" id=1]
+[ext_resource path="res://Character/StateMachine.gd" type="Script" id=2]
+
+[node name="Character" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="FiniteStateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="HealthTimer" type="Timer" parent="."]
+[connection signal="timeout" from="HealthTimer" to="." method="_on_HealthTimer_timeout"]

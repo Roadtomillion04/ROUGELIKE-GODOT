@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Weapons/TemplateWeapons.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/Swords/TemplateSwords.gd" type="Script" id=2]
+[ext_resource path="res://HitBox.gd" type="Script" id=3]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/weapon_sword_1.png" type="Texture" id=4]
+[ext_resource path="res://Weapons/SwordAnimations/SwordAttack.tres" type="Animation" id=5]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/slash_effect_anim_spritesheet.png" type="Texture" id=6]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.0
+height = 7.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4, 8 )
+
+[node name="TemplateSwords" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Node2D" parent="." index="0"]
+rotation = 2.0944
+
+[node name="Sprite" parent="Node2D" index="0"]
+position = Vector2( 7, 3 )
+rotation = 0.872665
+texture = ExtResource( 4 )
+offset = Vector2( 5, -4 )
+
+[node name="HitBox" parent="Node2D/Sprite" index="0"]
+collision_layer = 0
+collision_mask = 4
+knockback_force = 140
+can_do_crit = true
+
+[node name="CollisionShape2D" parent="Node2D/Sprite/HitBox" index="0"]
+position = Vector2( 7.07107, -2.82843 )
+rotation = 0.785398
+shape = SubResource( 1 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D" index="1"]
+playback_speed = 2.0
+anims/SwordAnimation = ExtResource( 5 )
+
+[node name="SlashSprite" type="Sprite" parent="." index="1"]
+visible = false
+position = Vector2( 45.5385, 0 )
+texture = ExtResource( 6 )
+hframes = 3
+frame = 2
+
+[node name="HitBox" type="Area2D" parent="SlashSprite" index="0"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 3 )
+can_do_crit = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlashSprite/HitBox" index="0"]
+position = Vector2( -1, 0 )
+shape = SubResource( 2 )
+disabled = true

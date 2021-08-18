@@ -1,0 +1,115 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/Fire Bullet Pixel All.png" type="Texture" id=1]
+[ext_resource path="res://Weapons/Projectiles/TemplateProjectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Weapons/Projectiles/MagicBullet.gd" type="Script" id=3]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/explosion_anim_f0.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=3]
+length = 3.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hitbox/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Hitbox/CollisionShape2D:shape:radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 8.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 4.0
+
+[node name="MagicBullet" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+velocity = 100.0
+
+[node name="Hitbox" parent="." index="0"]
+knockback_force = 60
+can_do_crit = false
+
+[node name="Sprite" parent="Hitbox" index="0"]
+visible = true
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -2.20737, 62.3237, 18.4414, 17.4708 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="1"]
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" parent="." index="1"]
+visible = false
+modulate = Color( 0.45098, 1, 0.0627451, 1 )
+frames = SubResource( 2 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+anims/tripleattack = SubResource( 3 )
+
+[node name="CollisionShape2D" parent="WallsDetector" index="0"]
+shape = SubResource( 4 )
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

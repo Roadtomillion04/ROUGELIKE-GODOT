@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://HitBox.gd" type="Script" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/props_itens/bookshelf.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 7 )
+
+[node name="Chasm" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 1 )
+knockback_force = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

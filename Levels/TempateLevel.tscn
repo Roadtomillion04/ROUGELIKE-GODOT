@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Character/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Levels/TempateLevel.gd" type="Script" id=3]
+[ext_resource path="res://Character/Player/Camera2D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Levels/Rooms.gd" type="Script" id=7]
+
+[node name="TempateLevel" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+z_index = 1
+
+[node name="Camera2D" parent="Player" instance=ExtResource( 4 )]
+
+[node name="UI" parent="." instance=ExtResource( 5 )]
+
+[node name="Rooms" type="Navigation2D" parent="."]
+script = ExtResource( 7 )
+num_levels = 10
+
+[node name="Guns" type="Node" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.8, 0.745098, 0.745098, 1 )
+[connection signal="armor_hp_changed" from="Player" to="UI" method="_on_Player_armor_hp_changed"]
+[connection signal="hp_changed" from="Player" to="UI" method="_on_Player_hp_changed"]
+[connection signal="regen_hp" from="Player" to="UI" method="_on_Player_regen_hp"]
+[connection signal="update_hp_items" from="Player" to="UI" method="_on_Player_update_hp_items"]

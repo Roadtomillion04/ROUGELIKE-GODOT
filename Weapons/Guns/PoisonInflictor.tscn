@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Weapons/Projectiles/CrowPoision.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/Guns/TemplateGuns.tscn" type="PackedScene" id=2]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/sprite.png" type="Texture" id=3]
+
+[node name="PoisonInflictor" instance=ExtResource( 2 )]
+PROJECTILE = ExtResource( 1 )
+fire_rate = 1.0
+
+[node name="Node2D" parent="." index="0"]
+position = Vector2( 8, -2 )
+
+[node name="Sprite" parent="Node2D" index="0"]
+rotation = 0.785398
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 15.3809, 64.8273, 17.2206, 15.6785 )
