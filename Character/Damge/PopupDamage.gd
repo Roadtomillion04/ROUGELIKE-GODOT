@@ -4,7 +4,7 @@ onready var tween = get_node("Tween")
 
 		   # label size     from            
 func start(size : Vector2, pos : Vector2, direction : int, distance : int = 12, label_text = "-1"):
-	rect_size = size
+	rect_min_size = size
 	text = label_text
 
 	tween.interpolate_property(self, "rect_position", pos, Vector2(pos.x, pos.y + distance * direction), 0.3, Tween.TRANS_CUBIC, Tween.EASE_OUT )

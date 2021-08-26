@@ -1,7 +1,8 @@
 extends Character
 class_name Enemy , "res://v1.1 dungeon crawler 16x16 pixel pack/enemies/flying creature/fly_anim_f0.png"
 
-const ITEMS = preload("res://Itmes/HealthPotion.tscn")
+const AMMO = preload("res://Itmes/BulletAmmo.tscn")
+const PASS_KEY = preload("res://Itmes/PassKey.tscn")
 
 const BLOOD = preload("res://Character/Enemies/Blood.tscn")
 
@@ -18,7 +19,7 @@ func chase():
 		var vector_to_next_point = path[0] - global_position
 		var distance_to_next_point = vector_to_next_point.length()
 		
-		if distance_to_next_point < 1:
+		if distance_to_next_point < 3:
 			path.remove(0)
 			if not path:
 				return
@@ -33,8 +34,7 @@ func chase():
 
 func _on_PathTimer_timeout():
 	if is_instance_valid(player):
-		path = navigation.get_simple_path(global_position, player.global_position)
-	
+		_get_path_to_player()
 	else:
 		path_timer.stop()
 		path = []
@@ -54,10 +54,21 @@ func _process(_delta):
 #		blood.rotation = position.angle_to_point(player.global_position)
 
 		if not item_spawnned :
-				var hp_potion = ITEMS.instance()
-				get_tree().current_scene.add_child(hp_potion)
-				hp_potion.position = global_position
-				hp_potion.splash_items(Vector2.RIGHT.rotated(rand_range(0, PI*2)))
+			var no_of_items: int = 4
+			while no_of_items > 0:
+				var bullet_ammo
+				if randi() % 2 == 0:
+					bullet_ammo = AMMO.instance()
+				else:
+					bullet_ammo = PASS_KEY.instance()
+				get_tree().current_scene.add_child(bullet_ammo)
+				bullet_ammo.position = global_position
+				bullet_ammo.splash_items(Vector2.RIGHT.rotated(rand_range(0, PI*2)))
 
-				
 				item_spawnned = true
+				no_of_items -= 1
+
+
+func _get_path_to_player():
+	path = navigation.get_simple_path(global_position, player.global_position)
+	

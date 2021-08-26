@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/ui (new)/menu_button.png" type="Texture" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/ui (new)/menu_button_press.png" type="Texture" id=2]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/Fonts/kenvector_future.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://UI/PauseMenu.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[node name="PauseMenu" type="Popup"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0784314, 0.0117647, 0.0117647, 0.270588 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 118.0
+margin_top = 101.0
+margin_right = 361.0
+margin_bottom = 169.0
+
+[node name="SaveContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_right = 243.0
+margin_bottom = 32.0
+
+[node name="SaveButton" type="TextureButton" parent="CenterContainer/VBoxContainer/SaveContainer"]
+margin_right = 96.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/SaveContainer"]
+margin_left = 100.0
+margin_top = 7.0
+margin_right = 243.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 1 )
+text = "SAVE and quit"
+
+[node name="LoadContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 243.0
+margin_bottom = 68.0
+
+[node name="LoadButton" type="TextureButton" parent="CenterContainer/VBoxContainer/LoadContainer"]
+margin_right = 96.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/LoadContainer"]
+margin_left = 100.0
+margin_top = 7.0
+margin_right = 152.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 1 )
+text = "load"
+[connection signal="pressed" from="CenterContainer/VBoxContainer/SaveContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/LoadContainer/LoadButton" to="." method="_on_LoadButton_pressed"]

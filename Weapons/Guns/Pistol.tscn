@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Weapons/Guns/TemplateGuns.tscn" type="PackedScene" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/PixelWeapons2.png" type="Texture" id=2]
+[ext_resource path="res://Weapons/Projectiles/PistolBullet.tscn" type="PackedScene" id=3]
+
+[node name="Pistol" instance=ExtResource( 1 )]
+PROJECTILE = ExtResource( 3 )
+fire_rate = 1.0
+
+[node name="Node2D" parent="." index="0"]
+position = Vector2( 11, 0 )
+
+[node name="Sprite" parent="Node2D" index="0"]
+texture = ExtResource( 2 )

@@ -5,6 +5,7 @@ class_name Projectile
 onready var life_timer = get_node("LifeTimer")
 onready var animation_player = get_node("AnimationPlayer")
 onready var hitbox = get_node("Hitbox")
+onready var player = get_tree().current_scene.get_node("Player")
 
 
 var direction: Vector2
@@ -23,7 +24,7 @@ func shot(initial_postion, mouse_direction):
 	direction = mouse_direction
 	hitbox.knockback_direction = mouse_direction
 	life_timer.start()
-
+	
 
 func _physics_process(delta):
 	position += direction * velocity * delta

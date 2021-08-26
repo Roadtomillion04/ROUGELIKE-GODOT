@@ -1,0 +1,202 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_idle_anim_f2.png" type="Texture" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_idle_anim_f2.png" type="Texture" id=2]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/weapon_sword_1.png" type="Texture" id=3]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/enemies/slime/slime_idle_anim_f3.png" type="Texture" id=4]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/Fonts/kenvector_future.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/ui (new)/menu_button.png" type="Texture" id=6]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/ui (new)/menu_button_press.png" type="Texture" id=7]
+[ext_resource path="res://UI/GUI/UI.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Fade in and out"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationCamera:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.1, 0.1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationCamera:smoothing_enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.223529, 0.0392157, 0.0392157, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="BG"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="BG"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
+texture = ExtResource( 2 )
+expand = true
+flip_h = true
+
+[node name="TextureRect3" type="TextureRect" parent="BG"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="TextureRect4" type="TextureRect" parent="BG"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 126.0
+margin_top = 63.0
+margin_right = 353.0
+margin_bottom = 207.0
+
+[node name="RichTextLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 227.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "ROUGELIKE"
+
+[node name="StartButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 227.0
+margin_bottom = 72.0
+
+[node name="StartButton" type="TextureButton" parent="CenterContainer/VBoxContainer/StartButtonContainer"]
+margin_right = 96.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/StartButtonContainer"]
+margin_left = 100.0
+margin_top = 2.0
+margin_right = 200.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 2 )
+text = "START"
+
+[node name="LoadButtonContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0.490196 )
+margin_top = 76.0
+margin_right = 227.0
+margin_bottom = 108.0
+
+[node name="LoadButton" type="TextureButton" parent="CenterContainer/VBoxContainer/LoadButtonContainer2"]
+margin_right = 96.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/LoadButtonContainer2"]
+margin_left = 100.0
+margin_top = 2.0
+margin_right = 180.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 2 )
+text = "LOad"
+
+[node name="QuitButtonContainer3" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 112.0
+margin_right = 227.0
+margin_bottom = 144.0
+
+[node name="QuitButton" type="TextureButton" parent="CenterContainer/VBoxContainer/QuitButtonContainer3"]
+margin_right = 96.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/QuitButtonContainer3"]
+margin_left = 100.0
+margin_top = 2.0
+margin_right = 168.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 2 )
+text = "quit"
+
+[node name="AnimationCamera" type="Camera2D" parent="."]
+offset = Vector2( 240, 135 )
+current = true
+smoothing_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Fade in and out" = SubResource( 3 )
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartButtonContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/LoadButtonContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButtonContainer3/QuitButton" to="." method="_on_QuitButton_pressed"]

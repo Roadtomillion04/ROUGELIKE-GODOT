@@ -6,7 +6,7 @@
 
 [node name="MagicStaff" instance=ExtResource( 2 )]
 PROJECTILE = ExtResource( 1 )
-fire_rate = 1.5
+fire_rate = 0.8
 
 [node name="Node2D" parent="." index="0"]
 position = Vector2( 5, 0 )

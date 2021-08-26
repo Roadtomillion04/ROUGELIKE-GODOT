@@ -1,40 +1,34 @@
 extends FiniteStateMachine
 
-var dash_impluse : int = 5
-
 func _init():
 	_add_state("idle")
 	_add_state("move")
 	_add_state("hurt")
-	_add_state("dash")
 	_add_state("dead")
 
 func _ready():
-	set_state(states.idle)
+	set_state(states.move)
+
 
 func _state_logic(_delta):
-	if state == states.move or state == states.idle:
-		parent.get_input()
+	if state == states.move:
+		parent.chase()
 		parent.move()
 
 
 func _get_transition():
 	match state:
 		states.idle:
-			if parent.velocity.length() > 10: #Returns the length (magnitude) of this vector.
+			if parent.distance_to_player > parent.MAX_DISTANCE_TO_PLAYER or parent.distance_to_player < parent.MIN_DISTANCE_TO_PLAYER:
 				return states.move
 
 		states.move:
-			if parent.velocity.length() < 10:
+			if parent.distance_to_player < parent.MAX_DISTANCE_TO_PLAYER or parent.distance_to_player > parent.MIN_DISTANCE_TO_PLAYER:
 				return states.idle
-		
+
 		states.hurt:
 			if not animation_player.is_playing():
-				return states.idle
-		
-		states.dash:
-			if not animation_player.is_playing():
-				return states.idle
+				return states.move
 	return -1
 
 
@@ -43,14 +37,10 @@ func _enter_state(_previous_state, new_state):
 		states.idle:
 			animation_player.play("idle")
 		states.move:
-			animation_player.play("run")
+			animation_player.play("move")
 		states.hurt:
 			animation_player.play("hurt")
-			parent.cancel_attack()
-		states.dash:
-			animation_player.play("dash")
-			parent.velocity *= dash_impluse
-			parent.velocity.normalized()
 		states.dead:
 			animation_player.play("dead")
-			parent.cancel_attack()
+
+

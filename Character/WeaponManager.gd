@@ -23,28 +23,17 @@ func _ready():
 
 func _process(_delta):
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	if is_instance_valid(secondary_weapon):
 		
 		if Input.is_action_just_pressed("switch_weapons"):
 			if current_weapon == get_child(0):
-				switch_weapons(get_child(1))
 				current_weapon.weapon_changed = true
+				switch_weapons(get_child(1))
 				secondary_weapon.weapon_changed = false
 		
 			elif current_weapon == get_child(1):
-				switch_weapons(get_child(0))
 				secondary_weapon.weapon_changed = true
+				switch_weapons(get_child(0))
 				current_weapon.weapon_changed = false
 
 	else:

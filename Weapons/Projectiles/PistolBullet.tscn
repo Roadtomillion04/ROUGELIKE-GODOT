@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Weapons/Projectiles/TemplateProjectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/Fire Bullet Pixel All.png" type="Texture" id=2]
+[ext_resource path="res://Weapons/Projectiles/PistolBullet.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 3.5
+
+[node name="PistolBullet" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="Hitbox" index="0"]
+visible = true
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 47.1198, 114.213, 20.6905, 13.6223 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="1"]
+position = Vector2( 1, -1 )
+shape = SubResource( 1 )
+
+[node name="Light2D" parent="Hitbox" index="2"]
+position = Vector2( 0, 0 )
+
+[node name="AnimatedSprite" parent="." index="1"]
+visible = false

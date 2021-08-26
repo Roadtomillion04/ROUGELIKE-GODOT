@@ -57,7 +57,6 @@ fire_rate = 0.2
 modulate = Color( 0, 0.870588, 1, 1 )
 scale = Vector2( 0.8, 1 )
 texture = ExtResource( 2 )
-region_enabled = true
 region_rect = Rect2( 2.06166, 3.47596, 28.7639, 6.26541 )
 
 [node name="CollisionShape2D" parent="Node2D/Sprite/HitBox" index="0"]

@@ -5,6 +5,7 @@ var charge_heavy = false
 var screen_size
 
 var items: int = 0
+export(int) var ammo: int = 30
 
 #const PROJECTILE = preload("res://Character/Player/Projectile.tscn")
 
@@ -18,9 +19,14 @@ onready var animation_player = get_node("AnimationPlayer")
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	print(items)
-	#sword.hide()
-
+#	Global.save_data["Position"] = global_position
+#	Global.save_data["PlayerHp"] = self.hp
+	if Global.save_data.Position != null:
+		global_position = Global.save_data.Position
+		hp = Global.save_data.PlayerHp
+		armor_hp = Global.save_data.PlayerArmorHp
+	else:
+		Global.player_data(position, self.hp, self.armor_hp)
 
 func _process(_delta):
 	var mouse_direction = (get_global_mouse_position() - global_position).normalized()
@@ -62,9 +68,12 @@ func _process(_delta):
 	#position.x = clamp(position.x, 10, screen_size.x)
 	#position.y = clamp(position.y, 10, screen_size.y)
 
-	if Input.is_action_pressed("dodge"):
+	if Input.is_action_just_pressed("dodge"):
 		if not move_diection == Vector2.ZERO: # to do not dash at non movement
 			state_machine.set_state(state_machine.states.dash)
+
+func cancel_attack():
+	$WeaponManager.current_weapon.cancel_attack()
 
 func get_input():
 	move_diection = Vector2.ZERO
@@ -133,3 +142,9 @@ func update_items():
 func item_used():
 	items -= 1
 	get_tree().call_group("ItemList", "update_items", items)
+
+
+func _on_pass_key_claimed():
+	var key = Node.new()
+	key.name = "PASS_KEY"
+	add_child(key)

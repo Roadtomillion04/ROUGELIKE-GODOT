@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 2 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "fade"
 length = 0.4
 tracks/0/type = "value"
@@ -49,12 +49,11 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 5, 4 )
 
 [node name="CrowPoision" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-velocity = 200.0
 
 [node name="Hitbox" parent="." index="0"]
 damage = 0
@@ -63,7 +62,6 @@ can_do_crit = false
 
 [node name="Sprite" parent="Hitbox" index="0"]
 visible = true
-modulate = Color( 0.215686, 0.0941176, 0.564706, 1 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 448.92, 18.8544, 14.8091, 12.1036 )
@@ -72,10 +70,13 @@ region_rect = Rect2( 448.92, 18.8544, 14.8091, 12.1036 )
 position = Vector2( 0, -1 )
 shape = SubResource( 1 )
 
+[node name="Light2D" parent="Hitbox" index="2"]
+position = Vector2( -2, -1 )
+
 [node name="AnimationPlayer" parent="." index="3"]
-anims/fade = SubResource( 3 )
+anims/fade = SubResource( 2 )
 
 [node name="CollisionShape2D" parent="WallsDetector" index="0"]
 position = Vector2( 0, -1 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

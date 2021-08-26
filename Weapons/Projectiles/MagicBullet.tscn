@@ -86,7 +86,7 @@ radius = 4.0
 
 [node name="MagicBullet" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
-velocity = 100.0
+velocity = 150.0
 
 [node name="Hitbox" parent="." index="0"]
 knockback_force = 60
@@ -101,6 +101,9 @@ region_rect = Rect2( -2.20737, 62.3237, 18.4414, 17.4708 )
 [node name="CollisionShape2D" parent="Hitbox" index="1"]
 position = Vector2( 0, 1 )
 shape = SubResource( 1 )
+
+[node name="Light2D" parent="Hitbox" index="2"]
+position = Vector2( 0, 0 )
 
 [node name="AnimatedSprite" parent="." index="1"]
 visible = false

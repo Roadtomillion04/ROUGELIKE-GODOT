@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/knight_run_anim_f0.png" type="Texture" id=2]
@@ -18,7 +18,6 @@
 [ext_resource path="res://Weapons/Guns/AK.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Weapons/Swords/Sword.tscn" type="PackedScene" id=17]
 [ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/hit_effect_anim_f0.png" type="Texture" id=18]
-[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/props_itens/torch_anim_f4.png" type="Texture" id=19]
 [ext_resource path="res://UI/Shader.tres" type="Material" id=20]
 [ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/enemy_afterdead_explosion_anim_f3.png" type="Texture" id=21]
 [ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/enemy_afterdead_explosion_anim_f2.png" type="Texture" id=22]
@@ -33,14 +32,14 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "run",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 21 ) ],
 "loop": true,
 "name": "Dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "run",
 "speed": 5.0
 } ]
 
@@ -273,10 +272,5 @@ texture = ExtResource( 18 )
 script = ExtResource( 26 )
 
 [node name="Sword" parent="WeaponManager" index="0" instance=ExtResource( 17 )]
-visible = false
 
 [node name="AK" parent="WeaponManager" index="1" instance=ExtResource( 16 )]
-
-[node name="Light2D" type="Light2D" parent="." index="7"]
-enabled = false
-texture = ExtResource( 19 )

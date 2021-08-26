@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Weapons/Projectiles/TemplateProjectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_knife.png" type="Texture" id=2]
+[ext_resource path="res://Weapons/Projectiles/EnemyProjectiles/GoblinKnife.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.0
+height = 2.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 2.0
+height = 2.0
+
+[node name="GoblinKnife" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Hitbox" parent="." index="0"]
+collision_mask = 2
+can_do_crit = false
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 1, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="Hitbox" index="1"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="WallsDetector" index="0"]
+position = Vector2( 1, 0 )
+rotation = 1.5708
+shape = SubResource( 2 )

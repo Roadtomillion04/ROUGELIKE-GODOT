@@ -1,8 +1,34 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://HitBox.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/Projectiles/Projectile.gd" type="Script" id=2]
 [ext_resource path="res://Weapons/Projectiles/ProjectileGlow.gd" type="Script" id=3]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/BulletEffects/lights1.png" type="Texture" id=4]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/hit_effect_anim_spritesheet.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 6, 8 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 6, 0, 6, 8 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 12, 0, 6, 8 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 5 )
+region = Rect2( 18, 0, 6, 8 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "Hit_effect",
+"speed": 5.0
+} ]
 
 [sub_resource type="Animation" id=1]
 length = 0.7
@@ -181,17 +207,22 @@ collision_mask = 4
 script = ExtResource( 1 )
 can_do_crit = true
 
-[node name="Sprite" type="Sprite" parent="Hitbox"]
-visible = false
-modulate = Color( 0.215686, 0.0941176, 0.564706, 1 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 
+[node name="Sprite" type="Sprite" parent="Hitbox"]
+modulate = Color( 0.215686, 0.0941176, 0.564706, 1 )
+
 [node name="Light2D" type="Light2D" parent="Hitbox"]
-enabled = false
+position = Vector2( 2, 0 )
+texture = ExtResource( 4 )
+texture_scale = 2.0
+energy = 0.5
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 3 )
+animation = "Hit_effect"
 
 [node name="LifeTimer" type="Timer" parent="."]
 

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Itmes/TemplateItems.tscn" type="PackedScene" id=1]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/props_itens/key_silver.png" type="Texture" id=2]
+[ext_resource path="res://Itmes/PassKey.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 3 )
+
+[node name="PassKey" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="Area2D" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="Area2D" index="2"]
+position = Vector2( 1, 2 )
+shape = SubResource( 1 )

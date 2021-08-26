@@ -37,11 +37,10 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 7, 5 )
 
-[sub_resource type="Animation" id=8]
-resource_name = "idle"
+[sub_resource type="Animation" id=9]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -84,11 +83,11 @@ animation = "idle"
 
 [node name="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 8 )
 
 [node name="AnimationPlayer" parent="." index="3"]
 autoplay = "idle"
-anims/idle = SubResource( 8 )
+anims/idle = SubResource( 9 )
 
 [node name="ShootTimeout" type="Timer" parent="." index="6"]
 one_shot = true

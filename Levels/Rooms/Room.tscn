@@ -4,7 +4,9 @@
 [ext_resource path="res://Levels/Rooms/Room.gd" type="Script" id=2]
 [ext_resource path="res://Character/Enemies/EnemiesTracker.tscn" type="PackedScene" id=3]
 
-[node name="Room" type="Node2D"]
+[node name="Room" type="Node2D" groups=[
+"Room",
+]]
 script = ExtResource( 2 )
 
 [node name="TileMap" type="TileMap" parent="."]

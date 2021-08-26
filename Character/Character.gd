@@ -44,32 +44,34 @@ func take_damage(dam, dir, force):
 	var pop_up_damage = POPUP_SCORE_SCENE.instance() 
 	get_tree().current_scene.add_child(pop_up_damage)
 	
-	if armor_broken:
-		self.hp -= dam
+	if state_machine.state != state_machine.states.dead:
 	
-	else:
-		self.armor_hp -= dam
+		if armor_broken:
+			self.hp -= dam
 		
-	if hp > 0 or armor_hp > 0:
-		state_machine.set_state(state_machine.states.hurt)
-		velocity += dir * force
-		health_timer.start()
-		Global.camera.screen_shake(30, 0.01)
+		else:
+			self.armor_hp -= dam
+			
+		if hp > 0 or armor_hp > 0:
+			state_machine.set_state(state_machine.states.hurt)
+			velocity += dir * force
+			health_timer.start()
+			Global.camera.screen_shake(30, 0.01)
+			
+			#popup
+			pop_up_damage.start(Vector2(30, 10), global_position, -1, 12, "-" + str(dam))
+			
+			#framefreeze
+	#		framefreeze(0.1, 0.4)
 		
-		#popup
-		pop_up_damage.start(Vector2(30, 10), global_position, -1, 12, "-" + str(dam))
-		
-		#framefreeze
-#		framefreeze(0.1, 0.4)
-	
-	else:
-		state_machine.set_state(state_machine.states.dead)
-		velocity += dir * force * heavy_knockback
-		Global.camera.screen_shake(60, 0.01)
-		
-		pop_up_damage.start(Vector2(30, 10), global_position, -1, 30, "K.O")
-		
-		
+		else:
+			state_machine.set_state(state_machine.states.dead)
+			velocity += dir * force * heavy_knockback
+			Global.camera.screen_shake(60, 0.01)
+			
+			pop_up_damage.start(Vector2(30, 10), global_position, -1, 30, "K.O")
+			
+			
 
 func framefreeze(time_scale, duration):
 	Engine.time_scale = time_scale

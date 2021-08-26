@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://HitBox.gd"
 }, {
 "base": "Node2D",
+"class": "Items",
+"language": "GDScript",
+"path": "res://Itmes/TemplateItems.gd"
+}, {
+"base": "Node2D",
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://Weapons/Projectiles/Projectile.gd"
@@ -55,6 +60,7 @@ _global_script_class_icons={
 "FiniteStateMachine": "",
 "Guns": "res://v1.1 dungeon crawler 16x16 pixel pack/heroes/PixelWeapons2.png",
 "HitBox": "",
+"Items": "",
 "Projectile": "",
 "Swords": "",
 "Weapons": "res://v1.1 dungeon crawler 16x16 pixel pack/heroes/knight/weapon_sword_1.png"
@@ -76,7 +82,7 @@ window/size/width=480
 window/size/height=270
 window/size/test_width=1280
 window/size/test_height=720
-mouse_cursor/custom_image="res://v1.1 dungeon crawler 16x16 pixel pack/ui (new)/crosshair_3.png"
+mouse_cursor/custom_image="res://v1.1 dungeon crawler 16x16 pixel pack/ui (new)/crosshair_1.png"
 mouse_cursor/custom_image_hotspot=Vector2( 8, 8 )
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

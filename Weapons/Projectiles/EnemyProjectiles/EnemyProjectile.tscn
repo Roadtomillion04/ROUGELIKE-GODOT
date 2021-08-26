@@ -1,12 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Weapons/Projectiles/TemplateProjectile.tscn" type="PackedScene" id=1]
-[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/BulletEffects/bullet.png" type="Texture" id=2]
+[ext_resource path="res://Weapons/Projectiles/EnemyProjectiles/EnemyProjectile.gd" type="Script" id=2]
+[ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/enemies/EnemyBullet.png" type="Texture" id=3]
 [ext_resource path="res://v1.1 dungeon crawler 16x16 pixel pack/effects (new)/hit_effect_anim_spritesheet.png" type="Texture" id=4]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 3.0
-height = 3.0
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 7 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 4 )
@@ -32,31 +32,30 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=7]
-radius = 4.0
-height = 3.0
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8, 8 )
 
-[node name="Bullet" instance=ExtResource( 1 )]
-velocity = 400.0
+[node name="EnemyProjectile" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+life_time = 2.0
 
 [node name="Hitbox" parent="." index="0"]
-modulate = Color( 1, 1, 1, 1 )
-knockback_force = 100
+collision_mask = 2
+knockback_force = 600
 
 [node name="Sprite" parent="Hitbox" index="0"]
-visible = true
-modulate = Color( 1, 1, 1, 1 )
-texture = ExtResource( 2 )
-region_rect = Rect2( 129.55, 19.5131, 13.0179, 9.51307 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="Hitbox" index="1"]
-position = Vector2( 2, 0 )
-rotation = 1.5708
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Light2D" parent="Hitbox" index="2"]
-position = Vector2( 2, 0 )
-texture_scale = 2.0
+position = Vector2( 0, 0 )
+texture = ExtResource( 3 )
+texture_scale = 1.6
+color = Color( 0.0745098, 0.219608, 0.886275, 1 )
+energy = 1.0
 
 [node name="AnimatedSprite" parent="." index="1"]
 visible = false
@@ -64,8 +63,5 @@ frames = SubResource( 6 )
 animation = "Hit_effect"
 
 [node name="CollisionShape2D" parent="WallsDetector" index="0"]
-visible = false
-rotation = 1.5708
 shape = SubResource( 7 )
-[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]

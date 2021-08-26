@@ -2,6 +2,7 @@ extends Weapons
 class_name Guns, "res://v1.1 dungeon crawler 16x16 pixel pack/heroes/PixelWeapons2.png"
 
 var weapon_changed : bool = false
+var can_fire : bool = true
 
 export(PackedScene) var PROJECTILE = preload("res://Weapons/Projectiles/Rocket.tscn")
 export(float) var fire_rate : float = 0
@@ -27,7 +28,7 @@ func _process(_delta):
 	elif scale.y == -1 and mouse_direction.x > 0:
 			scale.y = 1
 	
-	if Input.is_action_pressed("ui_attack") and not weapon_changed and fire_delay_timer.is_stopped(): # only executes when stopped
+	if Input.is_action_pressed("ui_attack") and not weapon_changed and fire_delay_timer.is_stopped() and can_fire: # only executes when stopped
 		
 		if name == "Spear":
 			animation_player.play("SpearAnimation")
@@ -43,3 +44,12 @@ func _process(_delta):
 
 		if name == "AK":
 			animation_player.play("muzzle_flash")
+		
+			#we update ammo here
+		player.ammo = clamp(player.ammo - 1, 0, 99) 
+		get_tree().call_group("AmmoGUI", "_update_ammo", player.ammo)
+
+
+
+func _on_no_ammo(value):
+	can_fire = value
